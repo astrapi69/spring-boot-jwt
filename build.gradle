@@ -1,0 +1,39 @@
+plugins {
+	id "io.franzbecker.gradle-lombok" version "3.2.0"
+	id "org.springframework.boot" version "2.2.2.RELEASE"
+	id "io.spring.dependency-management" version "1.0.8.RELEASE"
+	id "java"
+	id "idea"
+	id "net.ltgt.apt" version "0.21"
+	id "net.ltgt.apt-idea" version "0.21"
+	id "com.github.ben-manes.versions" version "0.27.0"
+}
+
+group = "de.alpharogroup"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = "1.8"
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	lombokVersion = "1.18.10"
+	jjwtVersion = "0.9.1"
+}
+
+dependencies {
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	compile "io.jsonwebtoken:jjwt:${jjwtVersion}"
+	implementation "org.springframework.boot:spring-boot-starter"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
